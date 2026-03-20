@@ -1,0 +1,20 @@
+@startuml sharing_exportation
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Estudiante" as Estudiante
+actor "Estudiante Registrado" as EstudianteRegistrado
+
+EstudianteRegistrado -|> Estudiante
+
+rectangle "Módulo: Compartición y Exportación" {
+    usecase "Exportar (JPG, PDF, ICS)" as UC_ExportarBasico
+    usecase "Compartir por link" as UC_CompartirLink
+    usecase "Exportar a Google Calendar" as UC_ExportarGoogle
+}
+
+Estudiante --> UC_ExportarBasico
+Estudiante --> UC_CompartirLink
+EstudianteRegistrado --> UC_ExportarGoogle
+
+@enduml

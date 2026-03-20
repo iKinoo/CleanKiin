@@ -1,0 +1,65 @@
+@startuml general
+left to right direction
+skinparam packageStyle rectangle
+actor "Estudiante" as Estudiante
+actor "Estudiante Registrado" as EstudianteRegistrado
+actor "Administrador" as Admin
+' El estudiante registrado hereda todos los casos de uso del estudiante general
+EstudianteRegistrado -|> Estudiante
+rectangle "Kiin v2" {
+    
+    package "Selección Inicial" {
+        usecase "Seleccionar facultad" as UC_Facultad
+        usecase "Seleccionar carrera" as UC_Carrera
+        usecase "Seleccionar materias" as UC_Materias
+    }
+    package "Generación y Navegación" {
+        usecase "Generar combinaciones de horarios" as UC_Generar
+        usecase "Visualizar horarios (Calendario)" as UC_VistaCalendario
+        usecase "Visualizar detalles del horario" as UC_Detalles
+        usecase "Filtrar por número de materias" as UC_FiltroNum
+        usecase "Visualizar conflictos" as UC_Conflictos
+    }
+    
+    package "Fijación (Filtros Post-generación)" {
+        usecase "Fijar materia" as UC_FijarMateria
+        usecase "Fijar profesor (Pivote)" as UC_FijarProfesor
+    }
+    package "Compartición y Exportación" {
+        usecase "Exportar (JPG, PDF, ICS)" as UC_ExportarBasico
+        usecase "Compartir por link" as UC_CompartirLink
+        usecase "Exportar a Google Calendar" as UC_ExportarGoogle
+    }
+    
+    package "Gestión de Horarios Guardados" {
+        usecase "Guardar horario en cuenta" as UC_Guardar
+        usecase "Ver horarios guardados" as UC_VerGuardados
+        usecase "Nombrar horario guardado" as UC_Nombrar
+    }
+    package "Administración de Datos" {
+        usecase "Seleccionar escuela a actualizar" as UC_SelecEscuela
+        usecase "Subir/actualizar datos de horarios" as UC_ActualizarDatos
+    }
+}
+' Relaciones Estudiante
+UC_Facultad .> UC_Carrera : <<include>>
+UC_Carrera .>  UC_Materias : <<include>>
+Estudiante --> UC_Facultad
+UC_Generar .> UC_VistaCalendario : <<include>>
+UC_Generar .>  UC_Detalles : <<include>>
+UC_Generar .>  UC_FiltroNum : <<extend>>
+UC_Conflictos .> UC_VistaCalendario : <<extend>>
+UC_Conflictos .> UC_Detalles : <<extend>>
+Estudiante --> UC_FijarMateria
+Estudiante --> UC_FijarProfesor
+Estudiante --> UC_ExportarBasico
+Estudiante --> UC_CompartirLink
+' Relaciones Estudiante Registrado
+EstudianteRegistrado --> UC_ExportarGoogle
+EstudianteRegistrado --> UC_Guardar
+EstudianteRegistrado --> UC_VerGuardados
+' Relaciones Administrador
+Admin --> UC_ActualizarDatos
+UC_ActualizarDatos .> UC_SelecEscuela : <<include>>
+UC_Guardar  .> UC_Nombrar  : <<include>>
+@enduml

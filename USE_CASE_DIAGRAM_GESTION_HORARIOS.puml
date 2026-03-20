@@ -1,0 +1,17 @@
+@startuml schedules_management
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Estudiante Registrado" as EstudianteRegistrado
+
+rectangle "Módulo: Gestión de Horarios Guardados" {
+    usecase "Guardar horario en cuenta" as UC_Guardar
+    usecase "Ver horarios guardados" as UC_VerGuardados
+    usecase "Nombrar horario guardado" as UC_Nombrar
+}
+
+EstudianteRegistrado --> UC_Guardar
+EstudianteRegistrado --> UC_VerGuardados
+UC_Guardar  .> UC_Nombrar  : <<include>>
+
+@enduml

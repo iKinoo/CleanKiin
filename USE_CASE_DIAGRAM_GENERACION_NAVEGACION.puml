@@ -1,0 +1,22 @@
+@startuml generation_navigation
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Estudiante" as Estudiante
+
+rectangle "Módulo: Generación y Navegación" {
+    usecase "Generar combinaciones de horarios" as UC_Generar
+    usecase "Visualizar horarios (Calendario)" as UC_VistaCalendario
+    usecase "Visualizar detalles del horario" as UC_Detalles
+    usecase "Filtrar por número de materias" as UC_FiltroNum
+    usecase "Visualizar conflictos" as UC_Conflictos
+}
+
+Estudiante --> UC_Generar
+UC_Generar .> UC_VistaCalendario : <<include>>
+UC_Generar .>  UC_Detalles : <<include>>
+UC_Generar .>  UC_FiltroNum : <<extend>>
+UC_Conflictos .> UC_VistaCalendario : <<extend>>
+UC_Conflictos .> UC_Detalles : <<extend>>
+
+@enduml

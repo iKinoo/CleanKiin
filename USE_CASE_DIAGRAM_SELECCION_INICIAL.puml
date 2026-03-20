@@ -1,0 +1,17 @@
+@startuml initial_selection
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Estudiante" as Estudiante
+
+rectangle "Módulo: Selección Inicial" {
+    usecase "Seleccionar facultad" as UC_Facultad
+    usecase "Seleccionar carrera" as UC_Carrera
+    usecase "Seleccionar materias" as UC_Materias
+}
+
+Estudiante --> UC_Facultad
+UC_Facultad .> UC_Carrera : <<include>>
+UC_Carrera .>  UC_Materias : <<include>>
+
+@enduml

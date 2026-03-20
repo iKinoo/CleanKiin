@@ -1,0 +1,15 @@
+@startuml administration
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Administrador" as Admin
+
+rectangle "Módulo: Administración de Datos" {
+    usecase "Seleccionar escuela a actualizar" as UC_SelecEscuela
+    usecase "Subir/actualizar datos de horarios" as UC_ActualizarDatos
+}
+
+Admin --> UC_ActualizarDatos
+UC_ActualizarDatos .> UC_SelecEscuela : <<include>>
+
+@enduml

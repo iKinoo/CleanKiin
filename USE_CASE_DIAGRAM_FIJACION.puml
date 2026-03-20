@@ -1,0 +1,15 @@
+@startuml pinning
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Estudiante" as Estudiante
+
+rectangle "Módulo: Fijación (Filtros Post-generación)" {
+    usecase "Fijar materia" as UC_FijarMateria
+    usecase "Fijar profesor (Pivote)" as UC_FijarProfesor
+}
+
+Estudiante --> UC_FijarMateria
+Estudiante --> UC_FijarProfesor
+
+@enduml
